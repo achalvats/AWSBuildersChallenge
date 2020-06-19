@@ -1,0 +1,948 @@
+{
+  "metadata": {
+    "schemaVersion": "1.0",
+    "importType": "LEX",
+    "importFormat": "JSON"
+  },
+  "resource": {
+    "name": "QNARetail",
+    "version": "6",
+    "intents": [
+      {
+        "name": "MaskCheck",
+        "version": "2",
+        "fulfillmentActivity": {
+          "codeHook": {
+            "uri": "arn:aws:lambda:us-east-1:857209201797:function:QNARetailFunction",
+            "messageVersion": "1.0"
+          },
+          "type": "CodeHook"
+        },
+        "sampleUtterances": [
+          "mask check"
+        ],
+        "slots": []
+      },
+      {
+        "name": "CameraThree",
+        "version": "3",
+        "fulfillmentActivity": {
+          "codeHook": {
+            "uri": "arn:aws:lambda:us-east-1:857209201797:function:QNARetailFunction",
+            "messageVersion": "1.0"
+          },
+          "type": "CodeHook"
+        },
+        "sampleUtterances": [
+          "camera three"
+        ],
+        "slots": []
+      },
+      {
+        "name": "Greeting",
+        "version": "12",
+        "fulfillmentActivity": {
+          "codeHook": {
+            "uri": "arn:aws:lambda:us-east-1:857209201797:function:QNARetailFunction",
+            "messageVersion": "1.0"
+          },
+          "type": "CodeHook"
+        },
+        "sampleUtterances": [
+          "hi",
+          "hello",
+          "buy groceries"
+        ],
+        "slots": [],
+        "conclusionStatement": {
+          "messages": [
+            {
+              "groupNumber": 1,
+              "contentType": "PlainText",
+              "content": "hi"
+            },
+            {
+              "groupNumber": 1,
+              "contentType": "PlainText",
+              "content": "hello"
+            },
+            {
+              "groupNumber": 2,
+              "contentType": "PlainText",
+              "content": "I can help you to do your shopping easily"
+            },
+            {
+              "groupNumber": 2,
+              "contentType": "PlainText",
+              "content": "I'll guide you through bot to make your shopping easy"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Cleansers",
+        "version": "3",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "cleansers"
+        ],
+        "slots": [
+          {
+            "sampleUtterances": [],
+            "slotType": "CTypes",
+            "slotTypeVersion": "1",
+            "obfuscationSetting": "NONE",
+            "slotConstraint": "Required",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "What product do you want?"
+                }
+              ],
+              "responseCard": "{\"version\":1,\"contentType\":\"application/vnd.amazonaws.card.generic\",\"genericAttachments\":[{\"subTitle\":\"Select from the following :\",\"title\":\"Cleansers\",\"buttons\":[{\"text\":\"Detergent Soap\",\"value\":\"Detergent Soap\"},{\"text\":\"Detergent Powder\",\"value\":\"Detergent Powder\"}]}]}",
+              "maxAttempts": 2
+            },
+            "priority": 1,
+            "name": "CT"
+          }
+        ],
+        "conclusionStatement": {
+          "messages": [
+            {
+              "groupNumber": 1,
+              "contentType": "PlainText",
+              "content": "You ordered {CT}"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Megamart",
+        "version": "2",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "mega mart",
+          "supermarket"
+        ],
+        "slots": [],
+        "conclusionStatement": {
+          "messages": [
+            {
+              "groupNumber": 1,
+              "contentType": "PlainText",
+              "content": "Megamart/Supermaket user :"
+            },
+            {
+              "groupNumber": 2,
+              "contentType": "PlainText",
+              "content": "Provide mass discounts on products like 'GROCERY', 'DETERGENTS_PAPER' and 'DELICATESSEN' improve sale."
+            }
+          ]
+        }
+      },
+      {
+        "name": "Freshfood",
+        "version": "2",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "fresh food"
+        ],
+        "slots": [],
+        "conclusionStatement": {
+          "messages": [
+            {
+              "groupNumber": 1,
+              "contentType": "PlainText",
+              "content": "Freshfood/Openmarket user :"
+            },
+            {
+              "groupNumber": 2,
+              "contentType": "PlainText",
+              "content": "Provide early and fresh delivery on the products like 'FRESH'and 'FROZEN'. to improve sales."
+            }
+          ]
+        }
+      },
+      {
+        "name": "Employee",
+        "version": "4",
+        "fulfillmentActivity": {
+          "codeHook": {
+            "uri": "arn:aws:lambda:us-east-1:857209201797:function:QNARetailFunction",
+            "messageVersion": "1.0"
+          },
+          "type": "CodeHook"
+        },
+        "sampleUtterances": [
+          "employee"
+        ],
+        "slots": [],
+        "conclusionStatement": {
+          "responseCard": "{\"version\":1,\"contentType\":\"application/vnd.amazonaws.card.generic\",\"genericAttachments\":[{\"imageUrl\":\"data:image/jpeg;base64,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\",\"subTitle\":\"all\",\"title\":\"mask\",\"buttons\":[{\"text\":\"OK\",\"value\":\"ok\"}]}]}",
+          "messages": [
+            {
+              "groupNumber": 1,
+              "contentType": "PlainText",
+              "content": "ok"
+            }
+          ]
+        }
+      },
+      {
+        "name": "MostSearched",
+        "version": "3",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "Most searched products"
+        ],
+        "slots": [],
+        "conclusionStatement": {
+          "messages": [
+            {
+              "groupNumber": 1,
+              "contentType": "PlainText",
+              "content": "Most searched product is Sanitizer."
+            }
+          ]
+        }
+      },
+      {
+        "name": "TopFive",
+        "version": "5",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "Top five products purchased",
+          "Top five products",
+          "Top five"
+        ],
+        "slots": [],
+        "conclusionStatement": {
+          "messages": [
+            {
+              "groupNumber": 1,
+              "contentType": "PlainText",
+              "content": "Top5 products are : Milk, Sanitizer, Masks, Dettol liquid and Detergent soap.."
+            }
+          ]
+        }
+      },
+      {
+        "name": "CameraFour",
+        "version": "1",
+        "fulfillmentActivity": {
+          "codeHook": {
+            "uri": "arn:aws:lambda:us-east-1:857209201797:function:QNARetailFunction",
+            "messageVersion": "1.0"
+          },
+          "type": "CodeHook"
+        },
+        "sampleUtterances": [
+          "camera four"
+        ],
+        "slots": []
+      },
+      {
+        "name": "MostBought",
+        "version": "4",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "Show the most bought items",
+          "what are the most bought products"
+        ],
+        "slots": [],
+        "conclusionStatement": {
+          "messages": [
+            {
+              "groupNumber": 1,
+              "contentType": "PlainText",
+              "content": "Most bought products are milk, sanitizers and masks."
+            }
+          ]
+        }
+      },
+      {
+        "name": "Payment",
+        "version": "7",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "payment",
+          "{pay}"
+        ],
+        "slots": [
+          {
+            "sampleUtterances": [
+              "by {pay}"
+            ],
+            "slotType": "payTypes",
+            "slotTypeVersion": "1",
+            "obfuscationSetting": "NONE",
+            "slotConstraint": "Required",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "how you want to proceed, card or cash?"
+                }
+              ],
+              "responseCard": "{\"version\":1,\"contentType\":\"application/vnd.amazonaws.card.generic\",\"genericAttachments\":[{\"title\":\"Payment Method\",\"buttons\":[{\"text\":\"Card\",\"value\":\"card\"},{\"text\":\"Cash\",\"value\":\"cash\"}]}]}",
+              "maxAttempts": 2
+            },
+            "priority": 1,
+            "name": "pay"
+          }
+        ],
+        "conclusionStatement": {
+          "responseCard": "{\"version\":1,\"contentType\":\"application/vnd.amazonaws.card.generic\",\"genericAttachments\":[{\"title\":\"available slot\",\"buttons\":[{\"text\":\"Time Slot\",\"value\":\"time slot\"}]}]}",
+          "messages": [
+            {
+              "groupNumber": 1,
+              "contentType": "PlainText",
+              "content": "Thanks for paying"
+            }
+          ]
+        }
+      },
+      {
+        "name": "CameraTwo",
+        "version": "3",
+        "fulfillmentActivity": {
+          "codeHook": {
+            "uri": "arn:aws:lambda:us-east-1:857209201797:function:QNARetailFunction",
+            "messageVersion": "1.0"
+          },
+          "type": "CodeHook"
+        },
+        "sampleUtterances": [
+          "camera two"
+        ],
+        "slots": []
+      },
+      {
+        "name": "NewBrands",
+        "version": "1",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "new brands"
+        ],
+        "slots": []
+      },
+      {
+        "name": "CustomerClusters",
+        "version": "5",
+        "fulfillmentActivity": {
+          "codeHook": {
+            "uri": "arn:aws:lambda:us-east-1:857209201797:function:achal-lambda-s3",
+            "messageVersion": "1.0"
+          },
+          "type": "CodeHook"
+        },
+        "sampleUtterances": [
+          "customer clusters"
+        ],
+        "slots": [
+          {
+            "sampleUtterances": [],
+            "slotType": "SlotChannel",
+            "slotTypeVersion": "1",
+            "obfuscationSetting": "NONE",
+            "slotConstraint": "Required",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "Which Channel?"
+                }
+              ],
+              "maxAttempts": 2
+            },
+            "priority": 1,
+            "name": "Channel"
+          },
+          {
+            "sampleUtterances": [],
+            "slotType": "AMAZON.NUMBER",
+            "obfuscationSetting": "NONE",
+            "slotConstraint": "Required",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "Delicatessen?"
+                }
+              ],
+              "maxAttempts": 2
+            },
+            "priority": 8,
+            "name": "Deli"
+          },
+          {
+            "sampleUtterances": [],
+            "slotType": "AMAZON.NUMBER",
+            "obfuscationSetting": "NONE",
+            "slotConstraint": "Required",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "Detergent papers?"
+                }
+              ],
+              "maxAttempts": 2
+            },
+            "priority": 7,
+            "name": "DetPap"
+          },
+          {
+            "sampleUtterances": [],
+            "slotType": "AMAZON.NUMBER",
+            "obfuscationSetting": "NONE",
+            "slotConstraint": "Required",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "How many Fresh Items?"
+                }
+              ],
+              "maxAttempts": 2
+            },
+            "priority": 3,
+            "name": "Fresh"
+          },
+          {
+            "sampleUtterances": [],
+            "slotType": "AMAZON.NUMBER",
+            "obfuscationSetting": "NONE",
+            "slotConstraint": "Required",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "How many fresh items?"
+                }
+              ],
+              "maxAttempts": 2
+            },
+            "priority": 6,
+            "name": "Frozen"
+          },
+          {
+            "sampleUtterances": [],
+            "slotType": "AMAZON.NUMBER",
+            "obfuscationSetting": "NONE",
+            "slotConstraint": "Required",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "Grocery?"
+                }
+              ],
+              "maxAttempts": 2
+            },
+            "priority": 5,
+            "name": "Grocery"
+          },
+          {
+            "sampleUtterances": [],
+            "slotType": "AMAZON.NUMBER",
+            "obfuscationSetting": "NONE",
+            "slotConstraint": "Required",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "How much Milk?"
+                }
+              ],
+              "maxAttempts": 2
+            },
+            "priority": 4,
+            "name": "Milk"
+          },
+          {
+            "sampleUtterances": [],
+            "slotType": "SlotRegion",
+            "slotTypeVersion": "1",
+            "obfuscationSetting": "NONE",
+            "slotConstraint": "Required",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "Which Region?"
+                }
+              ],
+              "maxAttempts": 2
+            },
+            "priority": 2,
+            "name": "Region"
+          }
+        ]
+      },
+      {
+        "name": "ShowTrends",
+        "version": "2",
+        "fulfillmentActivity": {
+          "codeHook": {
+            "uri": "arn:aws:lambda:us-east-1:857209201797:function:QNARetailFunction",
+            "messageVersion": "1.0"
+          },
+          "type": "CodeHook"
+        },
+        "sampleUtterances": [
+          "show trends"
+        ],
+        "slots": []
+      },
+      {
+        "name": "Bye",
+        "version": "1",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "bye",
+          "exit",
+          "good bye"
+        ],
+        "slots": [],
+        "conclusionStatement": {
+          "messages": [
+            {
+              "groupNumber": 1,
+              "contentType": "PlainText",
+              "content": "Thank you. Visit again!!"
+            },
+            {
+              "groupNumber": 1,
+              "contentType": "PlainText",
+              "content": "Good bye, Have a great day."
+            }
+          ]
+        }
+      },
+      {
+        "name": "Help",
+        "version": "1",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "help",
+          "need help"
+        ],
+        "slots": [],
+        "conclusionStatement": {
+          "messages": [
+            {
+              "groupNumber": 1,
+              "contentType": "PlainText",
+              "content": "Start by saying 'hi' again."
+            }
+          ]
+        }
+      },
+      {
+        "name": "dairyproducts",
+        "version": "11",
+        "fulfillmentActivity": {
+          "codeHook": {
+            "uri": "arn:aws:lambda:us-east-1:857209201797:function:QNARetailFunction",
+            "messageVersion": "1.0"
+          },
+          "type": "CodeHook"
+        },
+        "sampleUtterances": [
+          "{product}",
+          "I need {product}",
+          "{quantity}",
+          "{unit}",
+          "dairy products"
+        ],
+        "slots": [
+          {
+            "sampleUtterances": [],
+            "slotType": "productTypes",
+            "slotTypeVersion": "1",
+            "obfuscationSetting": "NONE",
+            "slotConstraint": "Required",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "What product do you want?"
+                }
+              ],
+              "responseCard": "{\"version\":1,\"contentType\":\"application/vnd.amazonaws.card.generic\",\"genericAttachments\":[{\"subTitle\":\"Select from the following:\",\"title\":\"\",\"buttons\":[{\"text\":\"Milk\",\"value\":\"milk\"},{\"text\":\"Eggs\",\"value\":\"eggs\"},{\"text\":\"Yogurt\",\"value\":\"yogurt\"},{\"text\":\"Butter\",\"value\":\"butter\"},{\"text\":\"Cheese\",\"value\":\"cheese\"}]}]}",
+              "maxAttempts": 2
+            },
+            "priority": 1,
+            "name": "product"
+          },
+          {
+            "sampleUtterances": [],
+            "slotType": "AMAZON.NUMBER",
+            "obfuscationSetting": "NONE",
+            "slotConstraint": "Required",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "How much do you want? (e.g : 2, 3, etc.)"
+                }
+              ],
+              "maxAttempts": 2
+            },
+            "priority": 2,
+            "name": "quantity"
+          },
+          {
+            "sampleUtterances": [],
+            "slotType": "units",
+            "slotTypeVersion": "1",
+            "obfuscationSetting": "NONE",
+            "slotConstraint": "Required",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "How do you want it?"
+                }
+              ],
+              "responseCard": "{\"version\":1,\"contentType\":\"application/vnd.amazonaws.card.generic\",\"genericAttachments\":[{\"subTitle\":\"Select from the following:\",\"title\":\"Units\",\"buttons\":[{\"text\":\"Packs\",\"value\":\"packs\"},{\"text\":\"Cartons\",\"value\":\"cartons\"},{\"text\":\"Bottles\",\"value\":\"bottles\"}]}]}",
+              "maxAttempts": 2
+            },
+            "priority": 3,
+            "name": "unit"
+          }
+        ]
+      },
+      {
+        "name": "TimeSlot",
+        "version": "2",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "time slot"
+        ],
+        "slots": [],
+        "conclusionStatement": {
+          "messages": [
+            {
+              "groupNumber": 1,
+              "contentType": "PlainText",
+              "content": "time slot is 15:45"
+            },
+            {
+              "groupNumber": 1,
+              "contentType": "PlainText",
+              "content": "time slot is 11:20"
+            },
+            {
+              "groupNumber": 2,
+              "contentType": "PlainText",
+              "content": "Thanks for Shopping with us."
+            },
+            {
+              "groupNumber": 2,
+              "contentType": "PlainText",
+              "content": "Thank you, visit again."
+            }
+          ]
+        }
+      },
+      {
+        "name": "SafetyEssentials",
+        "version": "2",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "safety essentials",
+          "I need {ST}",
+          "{ST}"
+        ],
+        "slots": [
+          {
+            "sampleUtterances": [],
+            "slotType": "SafteyTypes",
+            "slotTypeVersion": "1",
+            "obfuscationSetting": "NONE",
+            "slotConstraint": "Required",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "What essentials do you need?"
+                }
+              ],
+              "responseCard": "{\"version\":1,\"contentType\":\"application/vnd.amazonaws.card.generic\",\"genericAttachments\":[{\"subTitle\":\"Select from the following\",\"title\":\"Safety Essentials\",\"buttons\":[{\"text\":\"Sanitizers\",\"value\":\"Sanitizers\"},{\"text\":\"Hand Wash\",\"value\":\"Hand Wash\"},{\"text\":\"Masks\",\"value\":\"Masks\"}]}]}",
+              "maxAttempts": 2
+            },
+            "priority": 1,
+            "name": "ST"
+          }
+        ],
+        "conclusionStatement": {
+          "messages": [
+            {
+              "groupNumber": 1,
+              "contentType": "PlainText",
+              "content": "You ordered {ST}"
+            }
+          ]
+        }
+      },
+      {
+        "name": "CustomerView",
+        "version": "7",
+        "fulfillmentActivity": {
+          "codeHook": {
+            "uri": "arn:aws:lambda:us-east-1:857209201797:function:QNARetailFunction",
+            "messageVersion": "1.0"
+          },
+          "type": "CodeHook"
+        },
+        "sampleUtterances": [
+          "customer view",
+          "trends"
+        ],
+        "slots": []
+      },
+      {
+        "name": "CameraOne",
+        "version": "3",
+        "fulfillmentActivity": {
+          "codeHook": {
+            "uri": "arn:aws:lambda:us-east-1:857209201797:function:QNARetailFunction",
+            "messageVersion": "1.0"
+          },
+          "type": "CodeHook"
+        },
+        "sampleUtterances": [
+          "camera one"
+        ],
+        "slots": []
+      },
+      {
+        "name": "User",
+        "version": "3",
+        "fulfillmentActivity": {
+          "codeHook": {
+            "uri": "arn:aws:lambda:us-east-1:857209201797:function:QNARetailFunction",
+            "messageVersion": "1.0"
+          },
+          "type": "CodeHook"
+        },
+        "sampleUtterances": [
+          "user"
+        ],
+        "slots": []
+      },
+      {
+        "name": "Dataset",
+        "version": "4",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "dataset",
+          "data set"
+        ],
+        "slots": [],
+        "conclusionStatement": {
+          "messages": [
+            {
+              "groupNumber": 1,
+              "contentType": "PlainText",
+              "content": "Url for Dataset :"
+            },
+            {
+              "groupNumber": 2,
+              "contentType": "PlainText",
+              "content": "https://archive.ics.uci.edu/ml/datasets/Wholesale +customers"
+            }
+          ]
+        }
+      }
+    ],
+    "slotTypes": [
+      {
+        "name": "SlotRegion",
+        "version": "1",
+        "enumerationValues": [
+          {
+            "value": "one",
+            "synonyms": [
+              "1"
+            ]
+          },
+          {
+            "value": "two",
+            "synonyms": [
+              "2"
+            ]
+          },
+          {
+            "value": "three",
+            "synonyms": [
+              "3"
+            ]
+          }
+        ],
+        "valueSelectionStrategy": "TOP_RESOLUTION"
+      },
+      {
+        "name": "payTypes",
+        "version": "1",
+        "enumerationValues": [
+          {
+            "value": "cash"
+          },
+          {
+            "value": "card"
+          }
+        ],
+        "valueSelectionStrategy": "ORIGINAL_VALUE"
+      },
+      {
+        "name": "SafteyTypes",
+        "version": "1",
+        "enumerationValues": [
+          {
+            "value": "Sanitizers",
+            "synonyms": [
+              "sanitizers",
+              "alcohol sanitizers"
+            ]
+          },
+          {
+            "value": "Masks",
+            "synonyms": [
+              "masks",
+              "N95Masks"
+            ]
+          },
+          {
+            "value": "Hand Wash",
+            "synonyms": [
+              "hand wash"
+            ]
+          }
+        ],
+        "valueSelectionStrategy": "TOP_RESOLUTION"
+      },
+      {
+        "name": "productTypes",
+        "version": "1",
+        "enumerationValues": [
+          {
+            "value": "eggs"
+          },
+          {
+            "value": "yogurt"
+          },
+          {
+            "value": "butter"
+          },
+          {
+            "value": "milk"
+          },
+          {
+            "value": "cheese"
+          }
+        ],
+        "valueSelectionStrategy": "ORIGINAL_VALUE"
+      },
+      {
+        "name": "CTypes",
+        "version": "1",
+        "enumerationValues": [
+          {
+            "value": "Detergent Soap"
+          },
+          {
+            "value": "Detergent Powder"
+          }
+        ],
+        "valueSelectionStrategy": "ORIGINAL_VALUE"
+      },
+      {
+        "name": "units",
+        "version": "1",
+        "enumerationValues": [
+          {
+            "value": "bottles"
+          },
+          {
+            "value": "packs"
+          },
+          {
+            "value": "cartons"
+          }
+        ],
+        "valueSelectionStrategy": "ORIGINAL_VALUE"
+      },
+      {
+        "name": "SlotChannel",
+        "version": "1",
+        "enumerationValues": [
+          {
+            "value": "one",
+            "synonyms": [
+              "1"
+            ]
+          },
+          {
+            "value": "two",
+            "synonyms": [
+              "2"
+            ]
+          }
+        ],
+        "valueSelectionStrategy": "TOP_RESOLUTION"
+      }
+    ],
+    "voiceId": "Joanna",
+    "childDirected": false,
+    "locale": "en-US",
+    "idleSessionTTLInSeconds": 120,
+    "clarificationPrompt": {
+      "messages": [
+        {
+          "contentType": "PlainText",
+          "content": "Sorry, can you please repeat that?"
+        }
+      ],
+      "maxAttempts": 2
+    },
+    "abortStatement": {
+      "messages": [
+        {
+          "contentType": "PlainText",
+          "content": "Sorry, I could not understand. Goodbye."
+        }
+      ]
+    },
+    "detectSentiment": true
+  }
+}
